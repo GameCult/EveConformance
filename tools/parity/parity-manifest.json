@@ -865,7 +865,7 @@
                              "id":  "EveFlutter",
                              "ownerRepo":  "EveFlutter",
                              "repoRole":  "runtime-target",
-                             "status":  "incubating",
+                             "status":  "graduated",
                              "runtimes":  [
                                               "windows-flutter",
                                               "linux-flutter",
@@ -920,10 +920,11 @@
                                                                   ]
                                             },
                                             {
-                                                "description":  "Flutter lifecycle evidence is declared and smoke-checked for EveFlutter incubation.",
+                                                "description":  "Flutter lifecycle, owner CI, tagged release, and capture evidence are owned by EveFlutter.",
                                                 "status":  "passed",
                                                 "evidencePaths":  [
                                                                       "../EveFlutter/eveflutter-lifecycle.json",
+                                                                      "../EveFlutter/.github/workflows/runtime.yml",
                                                                       "../EveFlutter/scripts/run-eveflutter-lifecycle-smoke.ps1",
                                                                       "../EveFlutter/scripts/capture-flutter-parity.ps1",
                                                                       "../EveFlutter/scripts/capture-linux-flutter-parity.ps1",
@@ -931,9 +932,7 @@
                                                                   ]
                                             }
                                         ],
-                             "pendingProofs":  [
-                                                   "Tagged EveFlutter release, test runner, and capture runners are owned by EveFlutter rather than Eve incubation."
-                                               ]
+                             "pendingProofs":  []
                          },
                          {
                              "id":  "EveUnity",
