@@ -668,6 +668,7 @@
                                                         "invocationModel":  "executable-sidecar",
                                                         "contract":  "gamecult.eve.plugin_abi.v1",
                                                         "transports":  [
+                                                                           "cultnet-rudp",
                                                                            "stdio"
                                                                        ],
                                                         "authority":  [
@@ -677,7 +678,8 @@
                                                                       ],
                                                         "sidecar":  {
                                                                         "processKind":  "long-running-daemon",
-                                                                        "protocol":  "stdio-ndjson",
+                                                                        "protocol":  "cultnet-operation-v0",
+                                                                        "debugProtocol":  "stdio-ndjson",
                                                                         "requestSchema":  "gamecult.eve.plugin_abi.request.v1",
                                                                         "responseSchema":  "gamecult.eve.plugin_abi.response.v1",
                                                                         "commandEnvelope":  "gamecult.eve.command_invocation.v1",
@@ -697,7 +699,8 @@
                                                       "../Sai/plugins/sai-vn.plugin.json",
                                                       "../Sai/plugins/sai-vn.plugin-abi-fixture.json",
                                                       "../Sai/plugins/sai-vn.plugin-advertisement.json",
-                                                      "../Sai/src/eve-sidecar.cjs"
+                                                      "../Sai/src/eve-sidecar.cjs",
+                                                      "../Sai/src/eve-cultnet-sidecar.cjs"
                                                   ],
                                 "sourceRoot":  "../Eve"
                             },
