@@ -767,6 +767,7 @@
                                                         "invocationModel":  "executable-sidecar",
                                                         "contract":  "gamecult.eve.plugin_abi.v1",
                                                         "transports":  [
+                                                                           "cultnet-rudp",
                                                                            "stdio"
                                                                        ],
                                                         "authority":  [
@@ -776,7 +777,7 @@
                                                                       ],
                                                         "sidecar":  {
                                                                         "processKind":  "long-running-daemon",
-                                                                        "protocol":  "stdio-ndjson",
+                                                                        "protocol":  "cultnet-operation-v0",
                                                                         "requestSchema":  "gamecult.eve.plugin_abi.request.v1",
                                                                         "responseSchema":  "gamecult.eve.plugin_abi.response.v1",
                                                                         "commandEnvelope":  "gamecult.eve.command_invocation.v1",
@@ -796,7 +797,7 @@
                                                       "../EvePlugins/plugins/eve-plugin-tex/plugin.json",
                                                       "../EvePlugins/plugins/eve-plugin-tex/plugin-abi-fixture.json",
                                                       "../EvePlugins/plugins/eve-plugin-tex/advertisement.json",
-                                                      "../EvePlugins/plugins/eve-plugin-tex/src/sidecar.mjs"
+                                                      "../EvePlugins/plugins/eve-plugin-tex/src/cultnet-sidecar.mjs"
                                                   ],
                                 "sourceRoot":  "../Eve"
                             }
