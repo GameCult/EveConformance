@@ -886,7 +886,7 @@
                              "id":  "EveUnity",
                              "ownerRepo":  "EveUnity",
                              "repoRole":  "runtime-target",
-                             "status":  "incubating",
+                             "status":  "graduated",
                              "runtimes":  [
                                               "unity-uitoolkit",
                                               "unity-scene"
@@ -925,11 +925,12 @@
                                                                   ]
                                             },
                                             {
-                                                "description":  "Aetheria consumes Unity surface and UI Toolkit packages from EveUnity.",
+                                                "description":  "Aetheria consumes tagged Unity packages released by EveUnity.",
                                                 "status":  "passed",
                                                 "evidencePaths":  [
                                                                       "../EveUnity/packages/org.gamecult.eve.surface/package.json",
                                                                       "../EveUnity/packages/org.gamecult.eve.unity-uitoolkit/package.json",
+                                                                      "../EveUnity/ReleaseConsumerProject/Packages/packages-lock.json",
                                                                       "../Aetheria/Packages/manifest.json"
                                                                   ]
                                             },
@@ -955,8 +956,8 @@
                                                 "status":  "passed",
                                                 "evidencePaths":  [
                                                                       "../EveUnity/packages/org.gamecult.eve.unity-scene/eve-runtime-capability.json",
-                                                                      "../Aetheria/Packages/org.gamecult.aetheria.eve-runtime/Runtime/AetheriaEveUnitySceneProviderBridge.cs",
-                                                                      "../Aetheria/Assets/Scripts/Tests/DaemonRuntimeDocumentTests.cs"
+                                                                      "../EveUnity/ReleaseConsumerProject/Assets/Tests/PlayMode/GenericWorldCaptureTests.cs",
+                                                                      "../EveUnity/scripts/run-aetheria-daemon-world-witness.ps1"
                                                                   ]
                                             },
                                             {
@@ -973,8 +974,7 @@
                                             }
                                         ],
                              "pendingProofs":  [
-                                                   "Unity PlayMode frame capture is attached to conformance for Aetheria and the generic world-smoke provider.",
-                                                   "Generic live CultMesh/CultNet provider transport replaces Aetheria local state-file polling."
+
                                                ]
                          },
                          {
@@ -1981,8 +1981,8 @@
                                                        }
                                                    ],
                          "capture":  {
-                                         "status":  "partial-world-smoke-playmode-capture",
-                                         "note":  "The owner-controlled generic world-smoke PlayMode PNG passes; the separately running Aetheria daemon capture remains active lifecycle work.",
+                                         "status":  "released-aetheria-playmode-capture",
+                                         "note":  "The released generic EveUnity client discovers and captures the separately running Aetheria daemon world.",
                                          "artifacts":  [
                                                            {
                                                                "kind":  "png",
@@ -2055,7 +2055,7 @@
                                                     },
                                            "capture":  {
                                                            "ownerRepo":  "EveUnity",
-                                                           "status":  "partial-world-smoke-playmode-capture",
+                                                           "status":  "released-aetheria-playmode-capture",
                                                            "captureContract":  {
                                                                                    "ownerRepo":  "EveUnity",
                                                                                    "runtimeId":  "unity-scene",
@@ -2082,11 +2082,12 @@
                                                            "evidencePaths":  [
                                                                                  "scripts/build-capture-request.ps1",
                                                                                  "scripts/run-playmode-capture.ps1",
-                                                                                 "TestProject/Assets/Tests/PlayMode/GenericWorldCaptureTests.cs",
-                                                                                 "artifacts/playmode/world-smoke.png"
+                                                                                 "ReleaseConsumerProject/Assets/Tests/PlayMode/GenericWorldCaptureTests.cs",
+                                                                                 "scripts/run-aetheria-daemon-world-witness.ps1",
+                                                                                 "artifacts/aetheria-daemon/aetheria-daemon-world.png"
                                                                              ],
                                                            "pendingProofs":  [
-                                                                                 "Attach the Aetheria daemon PlayMode PNG; the generic world-smoke control is captured by EveUnity."
+
                                                                              ]
                                                        }
                                        }
