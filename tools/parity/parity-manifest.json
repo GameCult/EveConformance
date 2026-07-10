@@ -805,6 +805,59 @@
                                                       "../EvePlugins/plugins/eve-plugin-tex/src/cultnet-sidecar.mjs"
                                                   ],
                                 "sourceRoot":  "../Eve"
+                            },
+                            {
+                                "pluginId":  "fields.surface",
+                                "title":  "Semantic Fields",
+                                "kind":  "external-owner",
+                                "ownerRepo":  "EvePlugins",
+                                "repoRole":  "plugin-owner",
+                                "splitTarget":  "EvePlugins/eve-plugin-fields",
+                                "graduationTrigger":  "Split when field schemas, sidecar witness, and two runtime adapters are stable.",
+                                "capabilities":  [
+                                                     "field.surface2d",
+                                                     "gravity.surface",
+                                                     "field.scalar",
+                                                     "field.vector",
+                                                     "field.objects"
+                                                 ],
+                                "expectedRuntime":  {
+                                                        "invocationModel":  "executable-sidecar",
+                                                        "contract":  "gamecult.eve.plugin_abi.v1",
+                                                        "transports":  [
+                                                                           "cultnet-rudp",
+                                                                           "stdio"
+                                                                       ],
+                                                        "authority":  [
+                                                                          "renderer-independent",
+                                                                          "no-provider-state-mutation",
+                                                                          "provider-accepts-or-denies-commands"
+                                                                      ],
+                                                        "sidecar":  {
+                                                                        "processKind":  "long-running-daemon",
+                                                                        "protocol":  "cultnet-operation-v0",
+                                                                        "requestSchema":  "gamecult.eve.plugin_abi.request.v1",
+                                                                        "responseSchema":  "gamecult.eve.plugin_abi.response.v1",
+                                                                        "commandEnvelope":  "gamecult.eve.command_invocation.v1",
+                                                                        "receiptSchema":  "gamecult.eve.plugin_receipt.v1",
+                                                                        "stateAuthority":  "projects-provider-owned-field-documents-without-mutating-them"
+                                                                    }
+                                                    },
+                                "requiredFixtures":  [
+
+                                                     ],
+                                "schemaPath":  "schemas/gamecult.eve.plugin.v1.schema.json",
+                                "manifestPath":  "../EvePlugins/plugins/eve-plugin-fields/plugin.json",
+                                "abiFixturePath":  "../EvePlugins/plugins/eve-plugin-fields/plugin-abi-fixture.json",
+                                "advertisementSchemaPath":  "schemas/gamecult.eve.plugin_advertisement.v1.schema.json",
+                                "advertisementPath":  "../EvePlugins/plugins/eve-plugin-fields/advertisement.json",
+                                "expectedPaths":  [
+                                                      "../EvePlugins/plugins/eve-plugin-fields/plugin.json",
+                                                      "../EvePlugins/plugins/eve-plugin-fields/plugin-abi-fixture.json",
+                                                      "../EvePlugins/plugins/eve-plugin-fields/advertisement.json",
+                                                      "../EvePlugins/plugins/eve-plugin-fields/src/cultnet-sidecar.mjs"
+                                                  ],
+                                "sourceRoot":  "../Eve"
                             }
                         ],
     "splitTargets":  [
