@@ -956,6 +956,8 @@
                                                 "status":  "passed",
                                                 "evidencePaths":  [
                                                                       "../EveUnity/packages/org.gamecult.eve.unity-scene/eve-runtime-capability.json",
+                                                                      "../EveUnity/packages/org.gamecult.eve.unity-scene/Runtime/CultMesh/EveUnityCultMeshPlayableWorldProvider.cs",
+                                                                      "../EveUnity/ReleaseConsumerProject/Packages/packages-lock.json",
                                                                       "../EveUnity/ReleaseConsumerProject/Assets/Tests/PlayMode/GenericWorldCaptureTests.cs",
                                                                       "../EveUnity/scripts/run-aetheria-daemon-world-witness.ps1"
                                                                   ]
@@ -1520,6 +1522,8 @@
                                             ],
                          "supportedFeatures":  [
                                                    "providerAdvertisements",
+                                                   "verseDiscovery",
+                                                   "genericPlayableWorldDiscovery",
                                                    "commandTransport",
                                                    "providerSurfaceSession",
                                                    "providerSurfaceSource",
