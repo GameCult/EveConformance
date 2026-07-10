@@ -92,6 +92,7 @@ function validateIndex(index, directory, expectations, errors) {
   if (index.schema !== "gamecult.eve.conformance_export.v1") {
     errors.push(`schema:expected gamecult.eve.conformance_export.v1 got ${index.schema || ""}`);
   }
+  validateEvidenceLock(index.evidenceLock, errors);
 
   const packs = Array.isArray(index.packs) ? index.packs : [];
   const packIds = new Set(packs.map(pack => pack.id));
@@ -884,6 +885,30 @@ function validateIndex(index, directory, expectations, errors) {
   }
   if (!splitTargets.some(target => target.id === "EveUnity")) {
     errors.push("splitTargets:EveUnity:missing");
+  }
+}
+
+function validateEvidenceLock(lock, errors) {
+  if (lock?.schema !== "gamecult.eve.conformance_workspace_lock.v1") {
+    errors.push(`evidenceLock:schema:expected gamecult.eve.conformance_workspace_lock.v1 got ${lock?.schema || "missing"}`);
+  }
+  if (!/^[a-f0-9]{64}$/.test(lock?.sha256 || "")) {
+    errors.push("evidenceLock:sha256:invalid");
+  }
+  if (!Array.isArray(lock?.repositories) || !lock.repositories.length) {
+    errors.push("evidenceLock:repositories:missing");
+    return;
+  }
+  const names = new Set();
+  for (const [index, repository] of lock.repositories.entries()) {
+    for (const field of ["name", "url", "commit"]) {
+      if (!repository?.[field]) errors.push(`evidenceLock:repositories:${index}:${field}:missing`);
+    }
+    if (!/^[a-f0-9]{40}$/.test(repository?.commit || "")) {
+      errors.push(`evidenceLock:repositories:${index}:commit:invalid`);
+    }
+    if (names.has(repository?.name)) errors.push(`evidenceLock:repositories:${repository.name}:duplicate`);
+    names.add(repository?.name);
   }
 }
 

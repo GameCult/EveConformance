@@ -15,6 +15,14 @@ implementation bodies.
 powershell -ExecutionPolicy Bypass -File .\scripts\run-conformance.ps1
 ```
 
-The default workspace assumes sibling repositories under `E:\Projects`. Set
-`EVE_KERNEL_ROOT` when the Eve checkout lives elsewhere.
+The checked-in `conformance-workspace.lock.json` pins every owner repository to
+an immutable public Git commit. Materialize that evidence set, then run it:
 
+```powershell
+$workspace = powershell -ExecutionPolicy Bypass -File .\scripts\materialize-workspace.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\run-conformance.ps1 -WorkspaceRoot $workspace
+```
+
+For development, `-WorkspaceRoot E:\Projects` verifies sibling checkouts only
+when every checkout already matches the lock. Local branch state is never
+accepted as released conformance evidence.

@@ -1,12 +1,16 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const manifestPath = path.join(repoRoot, "tools/parity/parity-manifest.json");
+const workspaceRoot = process.env.EVE_WORKSPACE_ROOT
+  ? path.resolve(process.env.EVE_WORKSPACE_ROOT)
+  : path.dirname(repoRoot);
 const kernelRoot = process.env.EVE_KERNEL_ROOT
   ? path.resolve(process.env.EVE_KERNEL_ROOT)
-  : repoRoot;
+  : path.join(workspaceRoot, "Eve");
 const { compileEveDsl } = await import(pathToFileURL(path.join(kernelRoot, "web/eve-dsl.js")));
 const outputRoot = process.env.EVE_PARITY_OUTPUT
   ? path.resolve(process.env.EVE_PARITY_OUTPUT)
@@ -14,6 +18,13 @@ const outputRoot = process.env.EVE_PARITY_OUTPUT
 const conformanceOutputRoot = process.env.EVE_CONFORMANCE_OUTPUT
   ? path.resolve(process.env.EVE_CONFORMANCE_OUTPUT)
   : path.join(repoRoot, "artifacts/conformance");
+const evidenceLockBytes = await readFile(path.join(repoRoot, "conformance-workspace.lock.json"));
+const evidenceLockDocument = JSON.parse(evidenceLockBytes);
+const evidenceLock = {
+  schema: evidenceLockDocument.schema,
+  sha256: createHash("sha256").update(evidenceLockBytes).digest("hex"),
+  repositories: evidenceLockDocument.repositories,
+};
 
 const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
 const stamp = new Date().toISOString().replace(/[:.]/g, "-");
@@ -35,6 +46,7 @@ const report = {
   schema: "gamecult.eve.parity_report.v1",
   generatedAt: new Date().toISOString(),
   manifest: path.relative(repoRoot, manifestPath).replaceAll("\\", "/"),
+  evidenceLock,
   repoStrategy: {
     ...(manifest.repoStrategy || {}),
     conformanceHandoffErrors,
@@ -50,7 +62,7 @@ const report = {
 };
 const conformanceExport = buildConformanceExport(report);
 const conformanceExportErrors = validateSchemaSubset(
-  JSON.parse(await readFile(path.join(repoRoot, manifest.schemas["gamecult.eve.conformance_export.v1"]), "utf8")),
+  JSON.parse(await readFile(resolveWorkspacePath(manifest.schemas["gamecult.eve.conformance_export.v1"]), "utf8")),
   conformanceExport,
   "conformanceExport",
 );
@@ -594,7 +606,7 @@ function resolveCatalogPath(catalogDirectory, candidate) {
 
 async function evaluatePlugin(plugin, fixtureResults) {
   const expectedPaths = plugin.expectedPaths || [];
-  const missingPaths = expectedPaths.filter(candidate => !existsSync(path.join(repoRoot, candidate)));
+  const missingPaths = expectedPaths.filter(candidate => !existsSync(resolveWorkspacePath(candidate)));
   const requiredFixtures = plugin.requiredFixtures || [];
   const missingRequiredFixtures = requiredFixtures.filter(id => !fixtureResults.some(fixture => fixture.id === id && fixture.status === "pass"));
   const missingIncubationFields = requiredIncubationFields(plugin).filter(field => !plugin[field]);
@@ -1031,12 +1043,17 @@ async function readJsonDocument(documentPath) {
 }
 
 function resolveOwnedPath(owner, candidate) {
-  return path.resolve(repoRoot, owner?.sourceRoot || ".", candidate);
+  return resolveWorkspacePath(path.join(owner?.sourceRoot || ".", candidate));
 }
 
 function resolveWorkspacePath(candidate) {
+  if (path.isAbsolute(candidate)) return candidate;
+  const normalized = candidate.replaceAll("\\", "/");
+  if (normalized.startsWith("../")) {
+    return path.resolve(workspaceRoot, normalized.slice(3));
+  }
   const localPath = path.resolve(repoRoot, candidate);
-  if (existsSync(localPath) || candidate.startsWith("..")) return localPath;
+  if (existsSync(localPath)) return localPath;
   return path.resolve(kernelRoot, candidate);
 }
 
@@ -1718,7 +1735,7 @@ function resolveRuntimeOwnedPath(runtime, candidate) {
   if (!candidate) return repoRoot;
   if (path.isAbsolute(candidate)) return candidate;
   const sourceRoot = runtime?.sourceRoot || ".";
-  return path.resolve(repoRoot, sourceRoot, candidate);
+  return resolveWorkspacePath(path.join(sourceRoot, candidate));
 }
 
 function compareDependencyRecords(expectedRecords, actualRecords, label, keys) {
@@ -1872,7 +1889,7 @@ function evaluateSplitTargets(splitTargets, runtimeResults) {
     }
 
     for (const proof of proofs) {
-      const missingEvidence = (proof.evidencePaths || []).filter(candidate => !existsSync(path.join(repoRoot, candidate)));
+      const missingEvidence = (proof.evidencePaths || []).filter(candidate => !existsSync(resolveWorkspacePath(candidate)));
       if (proof.status !== "passed") {
         const description = proof.description || "unnamed";
         addBlocker(`proof:${description}:status:${proof.status || "missing"}`, {
@@ -1960,7 +1977,7 @@ async function validateCommandDescriptors(fixture, commandDescriptors) {
   if (!fixture.expect.commandDescriptorSchema) return [];
   const schemaPath = manifest.schemas?.[fixture.expect.commandDescriptorSchema];
   if (!schemaPath) return [`${fixture.expect.commandDescriptorSchema}:schemaPath:missing`];
-  const absoluteSchemaPath = path.join(repoRoot, schemaPath);
+  const absoluteSchemaPath = resolveWorkspacePath(schemaPath);
   if (!existsSync(absoluteSchemaPath)) return [`${schemaPath}:missing`];
   const schema = JSON.parse(await readFile(absoluteSchemaPath, "utf8"));
   return commandDescriptors.flatMap(command =>
@@ -2133,6 +2150,7 @@ function buildConformanceExport(report) {
     schema: "gamecult.eve.conformance_export.v1",
     generatedAt: report.generatedAt,
     sourceManifest: report.manifest,
+    evidenceLock: report.evidenceLock,
     boundaryRule: report.repoStrategy.boundaryRule || "",
     incubationPolicy: report.repoStrategy.incubationPolicy || "",
     schemaCatalog: buildSchemaCatalog(),
@@ -3039,7 +3057,7 @@ function validateRuntimeCaptureArtifacts(runtime, capture) {
     }
     if (artifact.schema && manifest.schemas?.[artifact.schema]) {
       try {
-        const schema = JSON.parse(readFileSync(path.join(repoRoot, manifest.schemas[artifact.schema]), "utf8"));
+        const schema = JSON.parse(readFileSync(resolveWorkspacePath(manifest.schemas[artifact.schema]), "utf8"));
         errors.push(...validateSchemaSubset(schema, document, `captureArtifact:${artifactPath}`));
       } catch (error) {
         errors.push(`${manifest.schemas[artifact.schema]}:unreadable:${error instanceof Error ? error.message : String(error)}`);
