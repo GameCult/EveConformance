@@ -2977,7 +2977,7 @@ function readRuntimeLayoutProbe(runtime, fixtureId) {
   if (!config) return { config: null, document: null, errors: [] };
   const errors = [];
   const probePath = config.path || "";
-  const absoluteProbePath = path.join(repoRoot, probePath);
+  const absoluteProbePath = resolveWorkspacePath(probePath);
   if (!probePath || !existsSync(absoluteProbePath)) {
     return { config, document: null, errors: [`${probePath || "layoutProbe.path"}:missing`] };
   }
@@ -2994,7 +2994,7 @@ function readRuntimeLayoutProbe(runtime, fixtureId) {
   const schemaPath = config.schema ? manifest.schemas?.[config.schema] : "";
   if (schemaPath) {
     try {
-      const schema = JSON.parse(readFileSync(path.join(repoRoot, schemaPath), "utf8"));
+      const schema = JSON.parse(readFileSync(resolveWorkspacePath(schemaPath), "utf8"));
       errors.push(...validateSchemaSubset(schema, document, `layoutProbe:${fixtureId}`));
     } catch (error) {
       errors.push(`${schemaPath}:unreadable:${error instanceof Error ? error.message : String(error)}`);
