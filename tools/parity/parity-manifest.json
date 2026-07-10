@@ -991,7 +991,8 @@
                              "requiredFeatures":  [
                                                       "providerAdvertisements",
                                                       "surfaceTreeProjection",
-                                                      "embeddedDocuments"
+                                                      "embeddedDocuments",
+                                                      "providerAssets"
                                                   ],
                              "requiredPlugins":  [
 
@@ -1007,7 +1008,7 @@
                                                                   ]
                                             },
                                             {
-                                                "description":  "EveElectron owns secure window and preload lifecycle.",
+                                                "description":  "EveElectron owns secure window, preload, and generic CultMesh asset lifecycle.",
                                                 "status":  "passed",
                                                 "evidencePaths":  [
                                                                       "../EveElectron/src/window-host.mjs",
@@ -1022,7 +1023,7 @@
                                                                   ]
                                             },
                                             {
-                                                "description":  "Aetheria consumes EveElectron for generic window, preload, provider transport, and renderer authority while retaining provider daemon lifecycle and asset protocol configuration.",
+                                                "description":  "Aetheria consumes EveElectron for generic window, preload, provider transport, renderer, and asset authority while retaining provider daemon lifecycle and provider-owned asset records.",
                                                 "status":  "passed",
                                                 "evidencePaths":  [
                                                                       "../Aetheria/Aetheria.Rts.Web/package.json",
@@ -1121,7 +1122,9 @@
                                                    "embeddedDocuments",
                                                    "pluginProjection",
                                                    "securePreloadBridge",
-                                                   "windowLifecycle"
+                                                   "windowLifecycle",
+                                                   "liveProviderHost",
+                                                   "providerAssets"
                                                ],
                          "supportedPlugins":  [
                                                   {
