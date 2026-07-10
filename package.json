@@ -1,0 +1,9 @@
+{
+  "name": "@gamecult/eve-conformance",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "powershell -ExecutionPolicy Bypass -File ./scripts/run-conformance.ps1"
+  }
+}
+
