@@ -11,7 +11,7 @@ jobs:
   locked-conformance:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Materialize public evidence workspace
         shell: powershell
@@ -29,7 +29,7 @@ jobs:
           "archive=$archive" >> $env:GITHUB_OUTPUT
 
       - name: Upload conformance bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: eve-conformance-${{ github.sha }}
           path: ${{ steps.pack.outputs.archive }}
