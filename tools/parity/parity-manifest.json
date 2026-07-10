@@ -1012,17 +1012,19 @@
                                                 "evidencePaths":  [
                                                                       "../EveElectron/src/window-host.mjs",
                                                                       "../EveElectron/src/eve-provider-preload.cjs",
+                                                                      "../EveElectron/src/eve-provider-preload-entry.cjs",
+                                                                      "../EveElectron/src/eve-electron-renderer.mjs",
                                                                       "../EveElectron/test/window-host.test.mjs",
-                                                                      "../EveElectron/test/preload.test.cjs"
+                                                                      "../EveElectron/test/preload.test.cjs",
+                                                                      "../EveElectron/test/renderer.test.mjs"
                                                                   ]
                                             },
                                             {
-                                                "description":  "Aetheria consumes EveElectron for generic window and preload authority while retaining provider transport and daemon lifecycle.",
+                                                "description":  "Aetheria consumes EveElectron for generic window, preload, provider transport, and renderer authority while retaining provider daemon lifecycle and asset protocol configuration.",
                                                 "status":  "passed",
                                                 "evidencePaths":  [
                                                                       "../Aetheria/Aetheria.Rts.Web/package.json",
                                                                       "../Aetheria/Aetheria.Rts.Web/Electron/main.ts",
-                                                                      "../Aetheria/Aetheria.Rts.Web/Electron/preload.cjs",
                                                                       "../Aetheria/Aetheria.Rts.Web/Client/app.ts"
                                                                   ]
                                             }
