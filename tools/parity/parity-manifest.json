@@ -592,11 +592,13 @@
                                                                "aetheria.runtime.daemon.frame.v1"
                                                            ],
                                        "expectedSurfaces":  [
-                                                                "aetheria.daemon.game",
+                                                                "aetheria.starbridge.pilot",
+                                                                "aetheria.starbridge.commander",
                                                                 "aetheria.daemon.editor"
                                                             ],
                                        "expectedSurfaceKinds":  {
-                                                                    "aetheria.daemon.game":  "interactive-world",
+                                                                    "aetheria.starbridge.pilot":  "interactive-world",
+                                                                    "aetheria.starbridge.commander":  "interactive-world",
                                                                     "aetheria.daemon.editor":  "interactive-world-editor"
                                                                 },
                                        "expectedCommands":  [

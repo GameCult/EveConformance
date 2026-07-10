@@ -1,13 +1,13 @@
 {
   "schema": "gamecult.eve.conformance_workspace_lock.v1",
   "repositories": [
-    { "name": "Aetheria", "url": "https://github.com/GameCult/Aetheria.git", "commit": "2b276a95b47b6ff6fc4c36dd2c34d45cfa765079" },
-    { "name": "Eve", "url": "https://github.com/GameCult/Eve.git", "commit": "2d9ce447fe29d1ccb5a1f41e5e1a678fc54a1f81" },
+    { "name": "Aetheria", "url": "https://github.com/GameCult/Aetheria.git", "commit": "a3970efd6e5fb9f41fdef855828c6b03daf1d789" },
+    { "name": "Eve", "url": "https://github.com/GameCult/Eve.git", "commit": "229b5a4ca1a9a46f804bef42bada5327b34c31c0" },
     { "name": "EveElectron", "url": "https://github.com/GameCult/EveElectron.git", "commit": "08f3a5b9bbd71fd6daa756a49b2e152c49e5ee81" },
     { "name": "EveFlutter", "url": "https://github.com/GameCult/EveFlutter.git", "commit": "3511e5c8f1ecd8e9ff119f3292afce84fa85a15d" },
     { "name": "EvePlugins", "url": "https://github.com/GameCult/EvePlugins.git", "commit": "dabea374b1ee89d084e93f95f05f56c1cadb8b14" },
     { "name": "EveTui", "url": "https://github.com/GameCult/EveTui.git", "commit": "01ea52f50d6ffcae290bbda8959e2ef73571d2cf" },
-    { "name": "EveUnity", "url": "https://github.com/GameCult/EveUnity.git", "commit": "864536cf010d43b0f14c43dc34ca2f7e4f1cb7a6" },
+    { "name": "EveUnity", "url": "https://github.com/GameCult/EveUnity.git", "commit": "af5eeb48761ed1f04622f4f87a3c8e8432362635" },
     { "name": "Norn", "url": "https://github.com/GameCult/Norn.git", "commit": "c33598d97c6cc8636984008bc739ebd16e612946" },
     { "name": "Sai", "url": "https://github.com/GameCult/Sai.git", "commit": "2e7be7e9f90e1eebce09538aff34c207820f41aa" }
   ]
