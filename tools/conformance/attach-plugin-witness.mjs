@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateSchemaSubset } from "../../runtimes/incubating/test-support/schema-subset.mjs";
+import { validateSchemaSubset } from "../lib/schema-subset.mjs";
 
 const [witnessArgument, exportArgument] = process.argv.slice(2);
 if (!witnessArgument || !exportArgument) {
@@ -12,8 +12,9 @@ const witnessPath = path.resolve(witnessArgument);
 const exportDirectory = path.resolve(exportArgument);
 const indexPath = path.join(exportDirectory, "index.json");
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+const kernelRoot = path.resolve(process.env.EVE_KERNEL_ROOT || "E:\\Projects\\Eve");
 const witness = parseJson(await readFile(witnessPath, "utf8"));
-const schema = parseJson(await readFile(path.join(repoRoot, "schemas/gamecult.eve.plugin_witness.v1.schema.json"), "utf8"));
+const schema = parseJson(await readFile(path.join(kernelRoot, "schemas/gamecult.eve.plugin_witness.v1.schema.json"), "utf8"));
 const schemaErrors = validateSchemaSubset(schema, witness);
 if (schemaErrors.length) throw new Error(`Plugin witness schema errors: ${schemaErrors.join("; ")}`);
 
