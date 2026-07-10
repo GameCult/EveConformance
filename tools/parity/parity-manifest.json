@@ -1014,9 +1014,11 @@
                                                                       "../EveElectron/src/eve-provider-preload.cjs",
                                                                       "../EveElectron/src/eve-provider-preload-entry.cjs",
                                                                       "../EveElectron/src/eve-electron-renderer.mjs",
+                                                                      "../EveElectron/src/live-provider-host.mjs",
                                                                       "../EveElectron/test/window-host.test.mjs",
                                                                       "../EveElectron/test/preload.test.cjs",
-                                                                      "../EveElectron/test/renderer.test.mjs"
+                                                                      "../EveElectron/test/renderer.test.mjs",
+                                                                      "../EveElectron/test/live-provider-host.test.mjs"
                                                                   ]
                                             },
                                             {
