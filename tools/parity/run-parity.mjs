@@ -80,6 +80,7 @@ for (const error of conformanceExportErrors) console.error(`Conformance export e
 if (report.summary.failedFixtures > 0) process.exitCode = 1;
 if (report.summary.failedPlugins > 0) process.exitCode = 1;
 if (report.summary.failedProviders > 0) process.exitCode = 1;
+if (report.summary.failedRuntimes > 0) process.exitCode = 1;
 if (conformanceHandoffErrors.length > 0) process.exitCode = 1;
 if (conformanceExportErrors.length > 0) process.exitCode = 1;
 
@@ -2078,7 +2079,8 @@ function summarize(fixtures, runtimes, plugins, providers, splitTargets) {
     failedProviders: providers.filter(provider => provider.status !== "advertised").length,
     totalRuntimes: runtimes.length,
     activeRuntimes: runtimes.filter(runtime => runtime.status === "active").length,
-    pendingRuntimes: runtimes.filter(runtime => runtime.status !== "active").length,
+    failedRuntimes: runtimes.filter(runtime => runtime.kind === "active" && runtime.status !== "active").length,
+    pendingRuntimes: runtimes.filter(runtime => runtime.kind !== "active").length,
     totalSplitTargets: splitTargets.length,
     readySplitTargets: splitTargets.filter(target => target.status === "ready-to-split").length,
     graduatedSplitTargets: splitTargets.filter(target => target.status === "graduated").length,
@@ -3528,7 +3530,7 @@ function renderMarkdown(report) {
     `- Fixtures: ${report.summary.passedFixtures}/${report.summary.totalFixtures} passed`,
     `- Plugins: ${report.summary.healthyPlugins}/${report.summary.totalPlugins} declared`,
     `- Providers: ${report.summary.advertisedProviders}/${report.summary.totalProviders} advertised`,
-    `- Runtimes: ${report.summary.activeRuntimes}/${report.summary.totalRuntimes} active`,
+    `- Runtimes: ${report.summary.activeRuntimes}/${report.summary.totalRuntimes} active (${report.summary.failedRuntimes} failed, ${report.summary.pendingRuntimes} pending)`,
     `- Split targets: ${report.summary.readySplitTargets}/${report.summary.totalSplitTargets} ready`,
     "",
     "## Repo Strategy",

@@ -1095,7 +1095,7 @@
                              "id":  "EveTui",
                              "ownerRepo":  "EveTui",
                              "repoRole":  "runtime-target",
-                             "status":  "incubating",
+                             "status":  "graduated",
                              "runtimes":  [
                                               "tui"
                                           ],
@@ -1112,39 +1112,36 @@
                                                  ],
                              "proofs":  [
                                             {
-                                                "description":  "EveTui split handoff is machine-readable.",
+                                                "description":  "EveTui owns a tagged package and runtime lifecycle.",
                                                 "status":  "passed",
                                                 "evidencePaths":  [
-                                                                      "runtimes/incubating/eve-tui/evetui-split-handoff.json",
-                                                                      "scripts/run-evetui-split-handoff-smoke.ps1",
-                                                                      "docs/eve-migration-roadmap.md",
-                                                                      "docs/parity-testing-harness.md"
+                                                                      "../EveTui/package.json",
+                                                                      "../EveTui/eve-runtime-capability.json",
+                                                                      "../EveTui/scripts/run-evetui-release-contract-smoke.ps1"
                                                                   ]
                                             },
                                             {
                                                 "description":  "EveTui lifecycle contract is machine-readable and smoke-checked.",
                                                 "status":  "passed",
                                                 "evidencePaths":  [
-                                                                      "runtimes/incubating/eve-tui/eve-runtime-capability.json",
-                                                                      "scripts/run-evetui-lifecycle-smoke.ps1",
-                                                                      "scripts/run-evetui-provider-shell-smoke.ps1"
+                                                                      "../EveTui/eve-runtime-capability.json",
+                                                                      "../EveTui/scripts/run-evetui-lifecycle-smoke.ps1",
+                                                                      "../EveTui/scripts/run-evetui-provider-shell-smoke.ps1"
                                                                   ]
                                             },
                                             {
                                                 "description":  "EveTui provider-shell skeleton selects advertised surfaces, lowers Eve surface trees into terminal grids, and emits Eve command intents.",
                                                 "status":  "passed",
                                                 "evidencePaths":  [
-                                                                      "runtimes/incubating/eve-tui/package.json",
-                                                                      "runtimes/incubating/eve-tui/src/eve-tui-shell.mjs",
-                                                                      "runtimes/incubating/eve-tui/test/eve-tui-shell.test.mjs",
-                                                                      "scripts/run-evetui-provider-shell-smoke.ps1"
+                                                                      "../EveTui/package.json",
+                                                                      "../EveTui/src/eve-tui-shell.mjs",
+                                                                      "../EveTui/test/eve-tui-shell.test.mjs",
+                                                                      "../EveTui/conformance/captures/aetheria/tui-grid.json",
+                                                                      "../EveTui/conformance/captures/world-smoke/tui-grid.json"
                                                                   ]
                                             }
                                         ],
-                             "pendingProofs":  [
-                                                   "TUI package release is cut from EveTui rather than Eve incubation.",
-                                                   "TUI capture path is owned by EveTui rather than Eve incubation."
-                                               ]
+                             "pendingProofs":  []
                          }
                      ],
     "runtimes":  [
@@ -1305,22 +1302,22 @@
                                                            {
                                                                "kind":  "png",
                                                                "schema":  "image/png",
-                                                               "path":  "artifacts/capture/generic-world/window.png",
+                                                               "path":  "conformance/captures/generic-world/window.png",
                                                                "runtimeId":  "electron-shell",
                                                                "providerId":  "eve.world-smoke",
                                                                "surfaceId":  "eve.world-smoke.surface",
                                                                "sourceSurfacePath":  "../Eve/web/fixtures/eve-world-smoke-surface.json",
-                                                               "requestPath":  "artifacts/capture/generic-world/runtime-witness.json"
+                                                               "requestPath":  "conformance/captures/generic-world/runtime-witness.json"
                                                            },
                                                            {
                                                                "kind":  "png",
                                                                "schema":  "image/png",
-                                                               "path":  "artifacts/capture/aetheria-world/window.png",
+                                                               "path":  "conformance/captures/aetheria-world/window.png",
                                                                "runtimeId":  "electron-shell",
                                                                "providerId":  "aetheria",
                                                                "surfaceId":  "aetheria.daemon.game",
                                                                "sourceSurfacePath":  "../Aetheria/conformance/eve/aetheria-world-surface.json",
-                                                               "requestPath":  "artifacts/capture/aetheria-world/runtime-witness.json"
+                                                               "requestPath":  "conformance/captures/aetheria-world/runtime-witness.json"
                                                            }
                                                        ]
                                      }
@@ -1332,12 +1329,12 @@
                          "ownerRepo":  "EveTui",
                          "repoRole":  "runtime-target",
                          "splitTarget":  "EveTui",
-                         "graduationTrigger":  "Split when TUI has a provider-agnostic terminal/grid lowerer, provider advertisement consumption, command transport, terminal capability manifest, and transcript/cell-grid capture evidence.",
+                         "currentHostRepo":  "EveTui",
+                         "graduationTrigger":  "Graduated: EveTui owns package, tests, terminal lowering, command transport, lifecycle, and capture evidence.",
                          "capabilityManifest":  {
                                                     "schemaPath":  "schemas/gamecult.eve.runtime_capability.v1.schema.json",
-                                                    "manifestPath":  "runtimes/incubating/eve-tui/eve-runtime-capability.json"
-                                                },
-                         "splitHandoffPath":  "runtimes/incubating/eve-tui/evetui-split-handoff.json",
+                               "manifestPath":  "eve-runtime-capability.json"
+                           },
                          "requiredFixtures":  [
                                                   "embedded-surface",
                                                   "aetheria-world",
@@ -1397,21 +1394,19 @@
                                                           "ownership":  "runtime-lowers-provider-world-surface-without-owning-world-state",
                                                           "lossiness":  "terminal-grid-summary-only",
                                                           "evidencePaths":  [
-                                                                                "runtimes/incubating/eve-tui/src/eve-tui-shell.mjs",
-                                                                                "runtimes/incubating/eve-tui/test/eve-tui-shell.test.mjs",
-                                                                                "web/fixtures/sai-vn-surface.json",
+                                                           "src/eve-tui-shell.mjs",
+                                                           "test/eve-tui-shell.test.mjs",
+                                                           "../Eve/web/fixtures/sai-vn-surface.json",
                                                                                 "../Aetheria/conformance/eve/aetheria.provider-advertisement.json",
-                                                                                "web/fixtures/eve-world-smoke.provider-advertisement.json"
+                                                           "../Eve/web/fixtures/eve-world-smoke.provider-advertisement.json"
                                                                             ]
                                                       }
                                                   ],
                          "expectedPaths":  [
-                                               "runtimes/incubating/eve-tui/package.json",
-                                               "runtimes/incubating/eve-tui/src/eve-tui-shell.mjs",
-                                               "runtimes/incubating/eve-tui/test/eve-tui-shell.test.mjs",
-                                               "runtimes/incubating/eve-tui/evetui-split-handoff.json",
-                                               "runtimes/incubating/eve-tui/eve-runtime-capability.json",
-                                               "scripts/run-evetui-split-handoff-smoke.ps1",
+                          "package.json",
+                          "src/eve-tui-shell.mjs",
+                          "test/eve-tui-shell.test.mjs",
+                          "eve-runtime-capability.json",
                                                "scripts/run-evetui-lifecycle-smoke.ps1",
                                                "scripts/run-evetui-provider-shell-smoke.ps1",
                                                "scripts/run-evetui-capture-contract-smoke.ps1",
@@ -1426,7 +1421,7 @@
                                            ],
                          "expectedSourceSymbols":  [
                                                        {
-                                                           "path":  "runtimes/incubating/eve-tui/src/eve-tui-shell.mjs",
+                                      "path":  "src/eve-tui-shell.mjs",
                                                            "contains":  [
                                                                             "EveTuiShell",
                                                                             "selectSurface",
@@ -1452,7 +1447,7 @@
                                                                         ]
                                                        },
                                                        {
-                                                           "path":  "runtimes/incubating/eve-tui/test/eve-tui-shell.test.mjs",
+                                      "path":  "test/eve-tui-shell.test.mjs",
                                                            "contains":  [
                                                                             "selects advertised provider surfaces",
                                                                             "command intents carry provider-advertised boundaries",
@@ -1523,36 +1518,36 @@
                                                            "path":  "tools/evetui/evetui-release-contract.test.mjs",
                                                            "contains":  [
                                                                             "builds EveTui release request from package manifest",
-                                                                            "evetui-v0.1.0",
-                                                                            "artifacts/evetui-release/0.1.0/eve-tui-0.1.0.tgz"
+                                                       "evetui-v0.1.1",
+                                                       "artifacts/evetui-release/0.1.1/eve-tui-0.1.1.tgz"
                                                                         ]
                                                        }
                                                    ],
                          "capture":  {
                                          "status":  "json-grid",
-                                         "note":  "TUI attaches a provider-advertisement-backed gamecult.eve.tui_grid.v1 JSON capture artifact; packaged runtime ownership remains an EveTui split blocker.",
+                    "note":  "EveTui publishes provider-advertisement-backed gamecult.eve.tui_grid.v1 release captures.",
                                          "artifacts":  [
                                                            {
                                                                "kind":  "json-grid",
                                                                "schema":  "gamecult.eve.tui_grid.v1",
-                                                               "path":  "artifacts/evetui-capture/latest/tui-grid.json",
+                                          "path":  "conformance/captures/aetheria/tui-grid.json",
                                                                "providerId":  "aetheria",
                                                                "surfaceId":  "aetheria.daemon.game",
                                                                "sourceSurfacePath":  "../Aetheria/conformance/eve/aetheria-world-surface.json",
-                                                               "requestPath":  "artifacts/evetui-capture/latest/capture-request.json"
+                                          "requestPath":  "conformance/captures/aetheria/capture-request.json"
                                                            },
                                                            {
                                                                "kind":  "json-grid",
                                                                "schema":  "gamecult.eve.tui_grid.v1",
-                                                               "path":  "artifacts/evetui-capture/latest/eve-world-smoke-tui-grid.json",
+                                          "path":  "conformance/captures/world-smoke/tui-grid.json",
                                                                "providerId":  "eve.world-smoke",
                                                                "surfaceId":  "eve.world-smoke.surface",
-                                                               "sourceSurfacePath":  "web/fixtures/eve-world-smoke-surface.json",
-                                                               "requestPath":  "artifacts/evetui-capture/latest/eve-world-smoke-capture-request.json"
+                                          "sourceSurfacePath":  "../Eve/web/fixtures/eve-world-smoke-surface.json",
+                                          "requestPath":  "conformance/captures/world-smoke/capture-request.json"
                                                            }
                                                        ]
                                      },
-                         "sourceRoot":  "../Eve"
+    "sourceRoot":  "../EveTui"
                      },
                      {
                          "id":  "unity-scene",
@@ -2051,7 +2046,7 @@
                                                            {
                                                                "kind":  "png",
                                                                "schema":  "gamecult.eve.runtime_frame_capture.v1",
-                                                               "path":  "artifacts/playmode/world-smoke.png",
+                                                               "path":  "conformance/captures/world-smoke/world-smoke.png",
                                                                "providerId":  "eve.world-smoke",
                                                                "surfaceId":  "eve.world-smoke.surface"
                                                            }
@@ -2148,7 +2143,7 @@
                                                                                  "scripts/run-playmode-capture.ps1",
                                                                                  "ReleaseConsumerProject/Assets/Tests/PlayMode/GenericWorldCaptureTests.cs",
                                                                                  "scripts/run-aetheria-daemon-world-witness.ps1",
-                                                                                 "artifacts/aetheria-daemon/aetheria-daemon-world.png"
+                                                                                 "conformance/captures/aetheria-daemon/aetheria-daemon-world.png"
                                                                              ],
                                                            "pendingProofs":  [
 
@@ -2369,8 +2364,7 @@
                                                                               "web/provider-advertisements.test.mjs",
                                                                               "web/hermodr-provider-catalog.test.mjs",
                                                                               "packages/eve-browser-lowering/test/browser-lowering.test.mjs",
-                                                                              "../EveConformance/tools/parity/parity-manifest.json",
-                                                                              "scripts/run-parity-harness.ps1"
+                                                         "scripts/run-parity-harness.ps1"
                                                                           ],
                                                         "pendingProofs":  [
 
