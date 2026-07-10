@@ -973,7 +973,6 @@
                                             }
                                         ],
                              "pendingProofs":  [
-                                                   "Tagged UPM release is cut from EveUnity.",
                                                    "Unity PlayMode frame capture is attached to conformance for Aetheria and the generic world-smoke provider.",
                                                    "Generic live CultMesh/CultNet provider transport replaces Aetheria local state-file polling."
                                                ]
@@ -1999,7 +1998,7 @@
                          "lifecycle":  {
                                            "release":  {
                                                            "ownerRepo":  "EveUnity",
-                                                           "status":  "owner-repo-upm-artifact",
+                                                                                "status":  "tagged-upm-release",
                                                            "releaseContract":  {
                                                                                    "ownerRepo":  "EveUnity",
                                                                                    "packageName":  "org.gamecult.eve.unity-scene",
@@ -2029,12 +2028,12 @@
                                                                                  "scripts/build-release-request.ps1"
                                                                              ],
                                                            "pendingProofs":  [
-                                                                                 "Cut and publish the first tagged EveUnity package release."
+
                                                                              ]
                                                        },
                                            "test":  {
                                                         "ownerRepo":  "EveUnity",
-                                                        "status":  "unity-scene-editmode-batchmode",
+                                                        "status":  "released-package-editmode-batchmode",
                                                         "testContract":  {
                                                                              "ownerRepo":  "EveUnity",
                                                                              "runnerKind":  "unity-editmode-batchmode",
@@ -2899,7 +2898,7 @@
                          "lifecycle":  {
                                            "release":  {
                                                            "ownerRepo":  "EveUnity",
-                                                           "status":  "upm-package-artifact-smoke",
+                                                                                "status":  "tagged-upm-release",
                                                            "releaseContract":  {
                                                                                    "ownerRepo":  "EveUnity",
                                                                                    "packageName":  "org.gamecult.eve.unity-uitoolkit",
@@ -2928,12 +2927,12 @@
                                                                                  "scripts/pack-uitoolkit.ps1"
                                                                              ],
                                                            "pendingProofs":  [
-                                                                                 "Tagged UPM release cut from EveUnity rather than Eve incubation."
+
                                                                              ]
                                                        },
                                            "test":  {
                                                         "ownerRepo":  "EveUnity",
-                                                        "status":  "batchmode-editmode-tests-and-consumer-build-smoke",
+                                                        "status":  "released-package-editmode-batchmode",
                                                         "command":  "powershell -ExecutionPolicy Bypass -File .\\scripts\\run-uitoolkit-tests.ps1",
                                                         "testContract":  {
                                                                              "ownerRepo":  "EveUnity",
@@ -3004,7 +3003,7 @@
                                                                               "scripts/run-uitoolkit-tests.ps1"
                                                                           ],
                                                         "pendingProofs":  [
-                                                                              "Cut and publish the first tagged EveUnity UI Toolkit package release."
+
                                                                           ]
                                                     },
                                            "capture":  {
