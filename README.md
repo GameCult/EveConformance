@@ -26,3 +26,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\run-conformance.ps1 -Workspac
 For development, `-WorkspaceRoot E:\Projects` verifies sibling checkouts only
 when every checkout already matches the lock. Local branch state is never
 accepted as released conformance evidence.
+
+GitHub Actions runs the same locked workspace on every push and uploads a bundle
+named for the EveConformance commit. A `v*` tag creates a GitHub release carrying
+that exact lock, parity report, schema catalog, capability matrix, packs, and
+typed witnesses.

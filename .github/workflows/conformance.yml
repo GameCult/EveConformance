@@ -1,0 +1,48 @@
+name: Eve conformance
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  locked-conformance:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Materialize public evidence workspace
+        shell: powershell
+        run: .\scripts\materialize-workspace.ps1
+
+      - name: Run locked conformance
+        shell: powershell
+        run: .\scripts\run-conformance.ps1 -WorkspaceRoot .\artifacts\workspace
+
+      - name: Pack immutable evidence bundle
+        id: pack
+        shell: powershell
+        run: |
+          $archive = .\scripts\pack-conformance.ps1 -Version $env:GITHUB_SHA
+          "archive=$archive" >> $env:GITHUB_OUTPUT
+
+      - name: Upload conformance bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: eve-conformance-${{ github.sha }}
+          path: ${{ steps.pack.outputs.archive }}
+          if-no-files-found: error
+
+      - name: Attach tagged release bundle
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view $env:GITHUB_REF_NAME 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $env:GITHUB_REF_NAME --verify-tag --generate-notes
+          }
+          gh release upload $env:GITHUB_REF_NAME "${{ steps.pack.outputs.archive }}" --clobber

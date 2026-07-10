@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "materialize": "powershell -ExecutionPolicy Bypass -File ./scripts/materialize-workspace.ps1",
+    "pack": "powershell -ExecutionPolicy Bypass -File ./scripts/pack-conformance.ps1",
     "test": "powershell -ExecutionPolicy Bypass -File ./scripts/run-conformance.ps1"
   }
 }
