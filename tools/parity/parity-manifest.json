@@ -2285,7 +2285,7 @@
                                                                               "web/eve-dsl.test.mjs",
                                                                               "web/provider-advertisements.test.mjs",
                                                                               "packages/eve-browser-lowering/test/browser-lowering.test.mjs",
-                                                                              "tools/parity/parity-manifest.json",
+                                                                              "../EveConformance/tools/parity/parity-manifest.json",
                                                                               "scripts/run-parity-harness.ps1"
                                                                           ],
                                                         "pendingProofs":  [
