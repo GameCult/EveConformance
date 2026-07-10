@@ -2126,6 +2126,9 @@
                          "supportedFeatures":  [
                                                    "embeddedDocuments",
                                                    "providerAdvertisements",
+                                                   "odinProviderDiscovery",
+                                                   "genericWorldDiscovery",
+                                                   "providerAssets",
                                                    "stateBindings",
                                                    "styleTokens",
                                                    "authorityWitnesses"
@@ -2190,11 +2193,23 @@
                                                        {
                                                            "path":  "web/surface.js",
                                                            "contains":  [
-                                                                            "loadLocalProviderCatalog",
+                                                                           "loadLocalProviderCatalog",
+                                                                            "loadHermodrProviders",
+                                                                            "createHermodrProviderTargets",
+                                                                            "selectInitialProviderTarget",
                                                                             "loadProviderAdvertisement",
                                                                             "mergeProviderAdvertisement",
                                                                             "publishCommandIntent",
                                                                             "browser.reference"
+                                                                        ]
+                                                       },
+                                                       {
+                                                           "path":  "web/hermodr-provider-catalog.mjs",
+                                                           "contains":  [
+                                                                            "createHermodrProviderTargets",
+                                                                            "selectInitialProviderTarget",
+                                                                            "interactive-world",
+                                                                            "surfaceId"
                                                                         ]
                                                        },
                                                        {
@@ -2295,10 +2310,11 @@
                                            "test":  {
                                                         "ownerRepo":  "Eve",
                                                         "status":  "node-tests-and-parity-harness",
-                                                        "command":  "node --test web/eve-dsl.test.mjs \u0026\u0026 npm --prefix packages/eve-browser-lowering test \u0026\u0026 powershell -ExecutionPolicy Bypass -File .\\scripts\\run-parity-harness.ps1",
+                                                        "command":  "node --test web/*.test.mjs \u0026\u0026 npm --prefix packages/eve-browser-lowering test \u0026\u0026 powershell -ExecutionPolicy Bypass -File .\\scripts\\run-parity-harness.ps1",
                                                         "evidencePaths":  [
                                                                               "web/eve-dsl.test.mjs",
                                                                               "web/provider-advertisements.test.mjs",
+                                                                              "web/hermodr-provider-catalog.test.mjs",
                                                                               "packages/eve-browser-lowering/test/browser-lowering.test.mjs",
                                                                               "../EveConformance/tools/parity/parity-manifest.json",
                                                                               "scripts/run-parity-harness.ps1"
