@@ -2033,22 +2033,20 @@
                                                                              "ownerRepo":  "EveUnity",
                                                                              "runnerKind":  "unity-editmode-batchmode",
                                                                              "runnerScript":  "scripts/run-package-tests.ps1",
-                                                                             "consumerProject":  "E:\\Projects\\Aetheria",
+                                                                             "consumerProject":  "TestProject",
                                                                              "packageName":  "org.gamecult.eve.unity-scene",
                                                                              "testAssembly":  "GameCult.Eve.UnityScene.Tests",
                                                                              "testPlatform":  "EditMode",
-                                                                             "resultsArtifact":  "artifacts/aetheria-unity-scene-editmode/{stamp}/unity-editmode-results.xml",
-                                                                             "logArtifact":  "artifacts/aetheria-unity-scene-editmode/{stamp}/unity-editmode.log",
-                                                                             "manifestMutation":  "Temporarily adds org.gamecult.eve.unity-scene to Aetheria Unity testables, runs GameCult.Eve.UnityScene.Tests, and restores Packages/manifest.json."
+                                                                             "resultsArtifact":  "artifacts/package-tests/{stamp}/unity-editmode-results.xml",
+                                                                             "logArtifact":  "artifacts/package-tests/{stamp}/unity-editmode.log",
+                                                                             "manifestMutation":  "none"
                                                                          },
                                                         "evidencePaths":  [
                                                                               "packages/org.gamecult.eve.unity-scene/Tests/Editor/GameCult.Eve.UnityScene.Tests.asmdef",
                                                                               "packages/org.gamecult.eve.unity-scene/Tests/Editor/EveUnitySceneSurfaceLowererTests.cs",
                                                                               "scripts/run-package-tests.ps1"
                                                                           ],
-                                                        "pendingProofs":  [
-                                                                              "Move the Aetheria consumer scenario into a provider-owned conformance pack that installs EveUnity from its owner repository."
-                                                                          ]
+                                                        "pendingProofs":  []
                                                     },
                                            "capture":  {
                                                            "ownerRepo":  "EveUnity",
@@ -2935,14 +2933,14 @@
                                                                              "ownerRepo":  "EveUnity",
                                                                              "runnerKind":  "unity-editmode-batchmode",
                                                                              "runnerScript":  "scripts/run-uitoolkit-tests.ps1",
-                                                                             "consumerProject":  "E:\\Projects\\Aetheria",
+                                                                             "consumerProject":  "TestProject",
                                                                              "unityExeDefault":  "C:\\Program Files\\Unity\\Hub\\Editor\\6000.4.2f1\\Editor\\Unity.exe",
                                                                              "packageName":  "org.gamecult.eve.unity-uitoolkit",
                                                                              "testAssembly":  "GameCult.Eve.UnityUIToolkit.Tests",
                                                                              "testPlatform":  "EditMode",
-                                                                             "resultsArtifact":  "artifacts/aetheria-unity-editmode/{stamp}/unity-editmode-results.xml",
-                                                                             "logArtifact":  "artifacts/aetheria-unity-editmode/{stamp}/unity-editmode.log",
-                                                                             "manifestMutation":  "Temporarily adds org.gamecult.eve.unity-uitoolkit to Aetheria Packages/manifest.json testables and restores the manifest after the run.",
+                                                                             "resultsArtifact":  "artifacts/uitoolkit-tests/{stamp}/unity-editmode-results.xml",
+                                                                             "logArtifact":  "artifacts/uitoolkit-tests/{stamp}/unity-editmode.log",
+                                                                             "manifestMutation":  "none",
                                                                              "managedAssemblyDependencies":  [
                                                                                                                  {
                                                                                                                      "assemblyName":  "GameCult.Caching.dll",

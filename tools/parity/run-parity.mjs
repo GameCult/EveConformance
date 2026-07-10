@@ -1663,7 +1663,7 @@ function compareTestContract(expected, actual, label, runtime) {
   if (actual.runnerScript && !existsSync(resolveRuntimeOwnedPath(runtime, actual.runnerScript))) {
     errors.push(`${label}.runnerScript:${actual.runnerScript}:missing`);
   }
-  if (actual.consumerProject && !existsSync(actual.consumerProject)) {
+  if (actual.consumerProject && !existsSync(resolveRuntimeOwnedPath(runtime, actual.consumerProject))) {
     errors.push(`${label}.consumerProject:${actual.consumerProject}:missing`);
   }
   errors.push(...compareDependencyRecords(
