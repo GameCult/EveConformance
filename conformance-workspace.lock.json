@@ -1,7 +1,7 @@
 {
   "schema": "gamecult.eve.conformance_workspace_lock.v1",
   "repositories": [
-    { "name": "Aetheria", "url": "https://github.com/GameCult/Aetheria.git", "commit": "a3970efd6e5fb9f41fdef855828c6b03daf1d789" },
+    { "name": "Aetheria", "url": "https://github.com/GameCult/Aetheria.git", "commit": "97f86d53656f9ee8efbf1262c47456eae2f1652f" },
     { "name": "Eve", "url": "https://github.com/GameCult/Eve.git", "commit": "229b5a4ca1a9a46f804bef42bada5327b34c31c0" },
     { "name": "EveElectron", "url": "https://github.com/GameCult/EveElectron.git", "commit": "08f3a5b9bbd71fd6daa756a49b2e152c49e5ee81" },
     { "name": "EveFlutter", "url": "https://github.com/GameCult/EveFlutter.git", "commit": "3511e5c8f1ecd8e9ff119f3292afce84fa85a15d" },
