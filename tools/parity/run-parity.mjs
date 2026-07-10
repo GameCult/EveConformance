@@ -3062,7 +3062,7 @@ function collectSplitHandoffMoveCoverage(report) {
   const records = [];
   for (const runtime of report.runtimes || []) {
     if (!runtime.splitHandoffPath) continue;
-    const absoluteHandoffPath = path.join(repoRoot, runtime.splitHandoffPath);
+    const absoluteHandoffPath = resolveWorkspacePath(runtime.splitHandoffPath);
     if (!existsSync(absoluteHandoffPath)) continue;
 
     let handoff;
@@ -3076,7 +3076,7 @@ function collectSplitHandoffMoveCoverage(report) {
       const currentPaths = Array.isArray(moveSet.currentPaths) ? moveSet.currentPaths : [];
       const observedProviderPaths = Array.isArray(moveSet.observedProviderPaths) ? moveSet.observedProviderPaths : [];
       for (const sourcePath of currentPaths) {
-        const absoluteSourcePath = path.join(repoRoot, sourcePath);
+        const absoluteSourcePath = resolveWorkspacePath(sourcePath);
         records.push(buildSplitHandoffMoveRecord(runtime, handoff, moveSet, {
           pathKind: "current",
           sourcePath,
@@ -3130,7 +3130,7 @@ function collectPluginHandoffMoveCoverage(report) {
   const records = [];
   for (const plugin of report.plugins || []) {
     if (!plugin.handoffPath) continue;
-    const absoluteHandoffPath = path.join(repoRoot, plugin.handoffPath);
+    const absoluteHandoffPath = resolveWorkspacePath(plugin.handoffPath);
     if (!existsSync(absoluteHandoffPath)) continue;
 
     let handoff;
@@ -3143,7 +3143,7 @@ function collectPluginHandoffMoveCoverage(report) {
     for (const moveSet of handoff.moveSets || []) {
       const currentPaths = Array.isArray(moveSet.currentPaths) ? moveSet.currentPaths : [];
       for (const sourcePath of currentPaths) {
-        const absoluteSourcePath = path.join(repoRoot, sourcePath);
+        const absoluteSourcePath = resolveWorkspacePath(sourcePath);
         records.push(buildPluginHandoffMoveRecord(plugin, handoff, moveSet, {
           pathKind: "current",
           sourcePath,
@@ -3189,7 +3189,7 @@ function collectProviderHandoffMoveCoverage(report) {
   const records = [];
   for (const provider of report.providers || []) {
     if (!provider.handoffPath) continue;
-    const absoluteHandoffPath = path.join(repoRoot, provider.handoffPath);
+    const absoluteHandoffPath = resolveWorkspacePath(provider.handoffPath);
     if (!existsSync(absoluteHandoffPath)) continue;
 
     let handoff;
@@ -3202,7 +3202,7 @@ function collectProviderHandoffMoveCoverage(report) {
     for (const moveSet of handoff.moveSets || []) {
       const currentPaths = Array.isArray(moveSet.currentPaths) ? moveSet.currentPaths : [];
       for (const sourcePath of currentPaths) {
-        const absoluteSourcePath = path.join(repoRoot, sourcePath);
+        const absoluteSourcePath = resolveWorkspacePath(sourcePath);
         records.push(buildProviderHandoffMoveRecord(provider, handoff, moveSet, {
           pathKind: "current",
           sourcePath,
